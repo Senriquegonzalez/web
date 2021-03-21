@@ -6,6 +6,7 @@
 
 package co.edu.ucundinamarca.servicioweb.controller;
 
+import co.edu.ucundinamarca.servicioweb.exeption.DatoUnicoException;
 import co.edu.ucundinamarca.servicioweb.pojo.Estudiante;
 import co.edu.ucundinamarca.servicioweb.service.Curso;
 import java.io.FileNotFoundException;
@@ -57,7 +58,7 @@ public class EstudianteController {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response  agregar(Estudiante estudiante) throws IOException, FileNotFoundException, ClassNotFoundException{
+    public Response  agregar(Estudiante estudiante) throws IOException, FileNotFoundException, ClassNotFoundException, DatoUnicoException{
         
          
             curso.leerfichero();

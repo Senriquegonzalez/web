@@ -5,6 +5,7 @@
  */
 package co.edu.ucundinamarca.servicioweb.service;
 
+import co.edu.ucundinamarca.servicioweb.exeption.DatoUnicoException;
 import co.edu.ucundinamarca.servicioweb.pojo.Estudiante;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -61,11 +62,35 @@ public class Curso implements Serializable {
         this.unestudiante = unestudiante;
     }
 
-    public void ingresar(Estudiante estudiante) {
+    public void ingresar(Estudiante estudiante) throws DatoUnicoException {
+       
 
-        estudiantes.add(estudiante);
+       int cantidadRepetido = 0;
+       int cantidadRepetidoid = 0;
+        for (int i = 0; i < estudiantes.size(); i++) {
+            x = (Estudiante) estudiantes.get(i);
+            if (x.getCedula().equals(estudiante.getCedula())) {
+                cantidadRepetido++;
+            }
+            else if (x.getId()==(int)estudiante.getId()) {
+                cantidadRepetidoid++;
+            }
 
+        }if (cantidadRepetido == 0 && cantidadRepetidoid == 0) {
+            estudiantes.add(estudiante);
+        } else if (cantidadRepetido != 0 && cantidadRepetidoid != 0) {
+            throw new DatoUnicoException("cedula y id ya existen");
+        } 
+        
+         else if (cantidadRepetido != 0) {
+            throw new DatoUnicoException("cedula ya existe");
+        }
+        else if (cantidadRepetidoid != 0) {
+            throw new DatoUnicoException("id ya existe");
+        }
+       
     }
+
 
     public void eliminar(int id) {
         Estudiante estudi = new Estudiante();
