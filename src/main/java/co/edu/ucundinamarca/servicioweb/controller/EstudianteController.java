@@ -23,7 +23,7 @@ import javax.ws.rs.core.Response;
 
 /**
  * 
- * @author Sergio Enrique Jair Gonzalez Arcos>
+ * @author Sergio Enrique Jair Gonzalez Arcos
  */
   @Path("/estudiante")
 public class EstudianteController {
@@ -87,7 +87,7 @@ public class EstudianteController {
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response  modificar(    Estudiante estudiante) throws IOException, FileNotFoundException, ClassNotFoundException {
+    public Response  modificar( Estudiante estudiante) throws IOException, FileNotFoundException, ClassNotFoundException {
         
         curso.leerfichero();
         curso.actualizar(estudiante);
