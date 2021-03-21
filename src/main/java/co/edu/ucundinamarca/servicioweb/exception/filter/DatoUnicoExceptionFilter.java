@@ -22,7 +22,7 @@ public class DatoUnicoExceptionFilter implements ExceptionMapper<DatoUnicoExcept
 
     @Override
     public Response toResponse(DatoUnicoException exception) {
-        ErrorDto error= new ErrorDto(exception.getMessage(),"La fecha actual es: " + LocalDate.now());
+        ErrorDto error= new ErrorDto(exception.getMessage(),"Fecha: " + LocalDate.now());
             return Response.status(Response.Status.NOT_FOUND).entity(error).build();
     }
 
