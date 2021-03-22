@@ -24,7 +24,7 @@ public class MetodoExceptionFilter implements ExceptionMapper <NotAllowedExcepti
     @Override
     public Response toResponse(NotAllowedException exception) {
         ErrorDto error = new ErrorDto(exception.getMessage(), "Fecha: " + LocalDate.now());
-            error.setMensaje("error de metodo http verifique GET PUT POS  ");
+            error.setMensaje("error de metodo http verifique GET PUT POS DELETE ");
             return Response.status(Response.Status.METHOD_NOT_ALLOWED)
                     .entity(error)
                     .type(MediaType.APPLICATION_JSON)

@@ -40,7 +40,7 @@ public class Curso implements Serializable {
         return estudiantes;
     }
 
-    public List mostarid(int id) {
+    public List mostarid(int id) throws  NullException, EncontradoException {
         Estudiante estudi = new Estudiante();
         for (int i = 0; i < estudiantes.size(); i++) {
             x = (Estudiante) estudiantes.get(i);
@@ -50,10 +50,16 @@ public class Curso implements Serializable {
         }
         if (estudi.getId() != 0) {
             unestudiante.add(estudi);
+            return unestudiante;
+        }
+        else {
+    throw new EncontradoException("estudiante no existe");
         }
 
-        return unestudiante;
-    }
+        
+    }    
+
+
 
     public List getUnestudiante() {
         return unestudiante;

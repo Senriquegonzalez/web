@@ -46,7 +46,7 @@ public class EstudianteController {
     @Path("/retornarid/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-     public Response retornarid ( @PathParam ("id" )int id ) throws IOException, FileNotFoundException, ClassNotFoundException {
+     public Response retornarid ( @PathParam ("id" )int id ) throws IOException, FileNotFoundException, ClassNotFoundException, NullException, EncontradoException {
         curso.leerfichero();
         curso.mostarid(id);
         

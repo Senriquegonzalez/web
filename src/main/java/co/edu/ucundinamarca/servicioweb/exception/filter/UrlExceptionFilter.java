@@ -25,7 +25,7 @@ public class UrlExceptionFilter implements ExceptionMapper<NotFoundException> {
     public Response toResponse(NotFoundException exception) {
        ErrorDto error = new ErrorDto(exception.getMessage(), "Fecha: " + LocalDate.now());
             error.setMensaje("Error en la url ");
-            return Response.status(Response.Status.BAD_REQUEST)
+            return Response.status(Response.Status.NOT_FOUND)
                     .entity(error)
                     .type(MediaType.APPLICATION_JSON)
                     .build();
