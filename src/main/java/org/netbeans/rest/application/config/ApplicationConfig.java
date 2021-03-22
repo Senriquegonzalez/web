@@ -38,6 +38,7 @@ public class ApplicationConfig extends Application {
         resources.add(co.edu.ucundinamarca.servicioweb.exception.filter.NullExceptionFilter.class);
         resources.add(co.edu.ucundinamarca.servicioweb.exception.filter.PeticionExceptionFilter.class);
         resources.add(co.edu.ucundinamarca.servicioweb.exception.filter.TipoExceptionFilter.class);
+        resources.add(co.edu.ucundinamarca.servicioweb.exception.filter.UrlExceptionFilter.class);
     }
 
 }
