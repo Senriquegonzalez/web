@@ -33,7 +33,11 @@ public class ApplicationConfig extends Application {
         resources.add(co.edu.ucundinamarca.servicioweb.controller.EstudianteController.class);
         resources.add(co.edu.ucundinamarca.servicioweb.exception.filter.DatoUnicoExceptionFilter.class);
         resources.add(co.edu.ucundinamarca.servicioweb.exception.filter.EncontradoExceptionFilter.class);
+        resources.add(co.edu.ucundinamarca.servicioweb.exception.filter.JsonExceptionFilter.class);
+        resources.add(co.edu.ucundinamarca.servicioweb.exception.filter.MetodoExceptionFilter.class);
         resources.add(co.edu.ucundinamarca.servicioweb.exception.filter.NullExceptionFilter.class);
+        resources.add(co.edu.ucundinamarca.servicioweb.exception.filter.PeticionExceptionFilter.class);
+        resources.add(co.edu.ucundinamarca.servicioweb.exception.filter.TipoExceptionFilter.class);
     }
 
 }
