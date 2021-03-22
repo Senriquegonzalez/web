@@ -7,6 +7,8 @@
 package co.edu.ucundinamarca.servicioweb.controller;
 
 import co.edu.ucundinamarca.servicioweb.exeption.DatoUnicoException;
+import co.edu.ucundinamarca.servicioweb.exeption.EncontradoException;
+import co.edu.ucundinamarca.servicioweb.exeption.NullException;
 import co.edu.ucundinamarca.servicioweb.pojo.Estudiante;
 import co.edu.ucundinamarca.servicioweb.service.Curso;
 import java.io.FileNotFoundException;
@@ -28,9 +30,6 @@ import javax.ws.rs.core.Response;
  */
   @Path("/estudiante")
 public class EstudianteController {
-
-  
-
 
     Curso curso = new Curso();
     
@@ -58,7 +57,7 @@ public class EstudianteController {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response  agregar(Estudiante estudiante) throws IOException, FileNotFoundException, ClassNotFoundException, DatoUnicoException{
+    public Response  agregar(Estudiante estudiante) throws IOException, FileNotFoundException, ClassNotFoundException, DatoUnicoException, NullException, NullException{
         
          
             curso.leerfichero();
@@ -66,32 +65,28 @@ public class EstudianteController {
             curso.crearfichero();
             return Response.status(Response.Status.OK).build();
         
-           
-            
-        
-            
       
     }
     
     @Path("/eliminar/{id}")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
-    public Response  eliminar(@PathParam ("id" )int id ) throws IOException, FileNotFoundException, ClassNotFoundException{
+    public Response  eliminar(@PathParam ("id" )int id ) throws IOException, FileNotFoundException, ClassNotFoundException, EncontradoException{
         
         curso.leerfichero();
         curso.eliminar(id);
         curso.crearfichero();
-      return Response.status(Response.Status.NO_CONTENT).entity( curso.mostarTodos()).build();
+      return Response.status(Response.Status.OK).entity(curso.mostarTodos()).build();
     }
     
     @Path("/modificar")
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response  modificar( Estudiante estudiante) throws IOException, FileNotFoundException, ClassNotFoundException {
+    public Response  modificar (Estudiante estu) throws IOException, FileNotFoundException, ClassNotFoundException, DatoUnicoException, EncontradoException, NullException{
         
         curso.leerfichero();
-        curso.actualizar(estudiante);
+        curso.actualizar(estu);
         curso.crearfichero();
         return Response.status(Response.Status.OK).entity( curso.mostarTodos()).build();
     }

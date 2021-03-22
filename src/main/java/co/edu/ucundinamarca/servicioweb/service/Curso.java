@@ -6,6 +6,8 @@
 package co.edu.ucundinamarca.servicioweb.service;
 
 import co.edu.ucundinamarca.servicioweb.exeption.DatoUnicoException;
+import co.edu.ucundinamarca.servicioweb.exeption.EncontradoException;
+import co.edu.ucundinamarca.servicioweb.exeption.NullException;
 import co.edu.ucundinamarca.servicioweb.pojo.Estudiante;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -41,15 +43,14 @@ public class Curso implements Serializable {
     public List mostarid(int id) {
         Estudiante estudi = new Estudiante();
         for (int i = 0; i < estudiantes.size(); i++) {
-            estudi =(Estudiante) estudiantes.get(i);
-            if(estudi.getId()==id){
-                  unestudiante.add(estudi);
+            x = (Estudiante) estudiantes.get(i);
+            if (x.getId() == id) {
+                estudi = x;
             }
-            
-            
         }
-
-        
+        if (estudi.getId() != 0) {
+            unestudiante.add(estudi);
+        }
 
         return unestudiante;
     }
@@ -62,64 +63,84 @@ public class Curso implements Serializable {
         this.unestudiante = unestudiante;
     }
 
-    public void ingresar(Estudiante estudiante) throws DatoUnicoException {
-       
+    public void ingresar(Estudiante estudiante) throws DatoUnicoException, NullException {
 
-       int cantidadRepetido = 0;
-       int cantidadRepetidoid = 0;
+        int cantidadRepetido = 0;
+        int cantidadRepetidoid = 0;
         for (int i = 0; i < estudiantes.size(); i++) {
             x = (Estudiante) estudiantes.get(i);
             if (x.getCedula().equals(estudiante.getCedula())) {
                 cantidadRepetido++;
-            }
-            else if (x.getId()==(int)estudiante.getId()) {
+            } else if (x.getId() == (int) estudiante.getId()) {
                 cantidadRepetidoid++;
             }
 
-        }if (cantidadRepetido == 0 && cantidadRepetidoid == 0) {
+        }
+        if(estudiante.getNombre().isEmpty()){
+            throw new NullException("nombre no puede ir vacio ");
+        }else if(estudiante.getCedula().isEmpty()){
+            throw new NullException("cedula no puede ir vacia ");
+        }
+        else if(estudiante.getEdad()<=0 ){
+            throw new NullException("campo edad ino puede ser menor a cero ");
+        }
+        else if (cantidadRepetido == 0 && cantidadRepetidoid == 0) {
             estudiantes.add(estudiante);
         } else if (cantidadRepetido != 0 && cantidadRepetidoid != 0) {
             throw new DatoUnicoException("cedula y id ya existen");
-        } 
-        
-         else if (cantidadRepetido != 0) {
+        } else if (cantidadRepetido != 0) {
             throw new DatoUnicoException("cedula ya existe");
-        }
-        else if (cantidadRepetidoid != 0) {
+        } else if (cantidadRepetidoid != 0) {
             throw new DatoUnicoException("id ya existe");
         }
-       
+
     }
 
-
-    public void eliminar(int id) {
-        Estudiante estudi = new Estudiante();
+    public void eliminar(int id) throws EncontradoException {
+        Estudiante estudi = null;
         for (int i = 0; i < estudiantes.size(); i++) {
             x = (Estudiante) estudiantes.get(i);
-            if (x.getId() == id) {
+            if (x.getId() == (int) id) {
                 estudi = x;
 
             }
 
         }
 
-        if (estudi.getId() != 0) {
+        if (estudi != null) {
             estudiantes.remove(estudi);
-
+        } else if (estudi == null) {
+            throw new EncontradoException("estudiante no existe");
         }
+
     }
 
-    public void actualizar(Estudiante estudiante) {
-        Estudiante estudi = new Estudiante();
-        int contador = 0;
+    public void actualizar(Estudiante estudiant) throws EncontradoException, NullException {
+        Estudiante estudia =new Estudiante();
+        int contador = -1;
         for (int i = 0; i < estudiantes.size(); i++) {
             x = (Estudiante) estudiantes.get(i);
-            if (x.getId() == estudiante.getId()) {
-                estudi = x;
+            if (x.getId() == (int) estudiant.getId()) {
+                estudia = x;
                 contador = i;
-
             }
-
+        }
+        if(estudiant.getNombre().isEmpty()){
+            throw new NullException("nombre no puede ir vacio ");
+        }else if(estudiant.getCedula().isEmpty()){
+            throw new NullException("cedula no puede ir vacia ");
+        }
+        else if(estudiant.getEdad()<=0 ){
+            throw new NullException("campo edad ino puede ser menor a cero ");
+        }
+        
+        
+        else  if (contador >= 0) {
+            
+            estudiantes.set(contador, estudiant);
+            //throw new EncontradoException("estudiante existe "+ contador );
+        } else if (contador < 0) {
+            throw new EncontradoException("estudiante no existe");
         }
 
     }
