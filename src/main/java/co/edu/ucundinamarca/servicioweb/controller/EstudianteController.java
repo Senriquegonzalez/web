@@ -76,7 +76,7 @@ public class EstudianteController {
         curso.leerfichero();
         curso.eliminar(id);
         curso.crearfichero();
-      return Response.status(Response.Status.OK).entity(curso.mostarTodos()).build();
+      return Response.status(Response.Status.NO_CONTENT).entity(curso.mostarTodos()).build();
     }
     
     @Path("/modificar")
