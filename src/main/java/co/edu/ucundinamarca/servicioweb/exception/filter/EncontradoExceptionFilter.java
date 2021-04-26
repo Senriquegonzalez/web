@@ -5,7 +5,7 @@
  */
 
 package co.edu.ucundinamarca.servicioweb.exception.filter;
-import co.edu.ucundinamarca.servicioweb.exeption.EncontradoException;
+import co.edu.ucundinamarca.servicioweb.exception.EncontradoException;
 import co.edu.ucundinamarca.servicioweb.pojo.ErrorDto;
 import java.time.LocalDate;
 import javax.ws.rs.core.Response;

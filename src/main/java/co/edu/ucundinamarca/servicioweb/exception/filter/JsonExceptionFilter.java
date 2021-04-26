@@ -25,10 +25,13 @@ public class JsonExceptionFilter implements ExceptionMapper <JsonException> {
     @Override
     public Response toResponse(JsonException exception) {
       ErrorDto error= new ErrorDto(exception.getMessage(),"Fecha: " + LocalDate.now());
-      error.setMensaje("error en la cosntruccion del json");
+      error.setMensaje("error en la construccion del json");
             return Response.status(Response.Status.NOT_FOUND)
                     .entity(error)
                     .build();
+    }
+
+    public JsonExceptionFilter() {
     }
 
 }

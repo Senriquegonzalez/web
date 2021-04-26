@@ -30,6 +30,8 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(co.edu.ucundinamarca.servicioweb.controller.ConsultaController.class);
+        resources.add(co.edu.ucundinamarca.servicioweb.controller.DetalleConsultaController.class);
         resources.add(co.edu.ucundinamarca.servicioweb.controller.EstudianteController.class);
         resources.add(co.edu.ucundinamarca.servicioweb.exception.filter.DatoUnicoExceptionFilter.class);
         resources.add(co.edu.ucundinamarca.servicioweb.exception.filter.EncontradoExceptionFilter.class);
